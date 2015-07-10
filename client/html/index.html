@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tasks</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    </head>
+    <body ng-app="ngAppTasks">
+        <div ng-controller="main_controller">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Tasks</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li ng-repeat="Tab in Tabs.TabsList" ng-class="Tab.class"><a ng-click="Tab.handler()">{{Tab.title}}</a></li>
+                            <!--<li class="active"><a ng-click = "Tabs.addTask()">Добавить задачу</a></li>
+                            <li><a ng-click="Tabs.editTask()">Редактировать задачу</a></li>
+                            <li><a ng-click="Tabs.showTask()">Список задач</a></li>
+                            <li><a ng-click="Tabs.deleteTask()">Удалить задачу</a></li>-->
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+            <div ng-switch="switchMainWindow">
+                <div ng-switch-default>
+                    <div><span>Исполнитель</span><input type="text" ng-model="TaskNew.executive"></div>
+                    <div><span>Время исполнения</span><input type="date" ng-model="TaskNew.time_exec"></div>
+                    <div><span>Задача</span><input type="text" ng-model="TaskNew.name"></div>
+                    <button ng-click="Task.send()">Отправить</button>
+                </div>
+                <div ng-switch-when="editWindow">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Задача</th>
+                                        <th>Время исполнения</th>
+                                        <th>Исполнитель</th>
+                                        <th>Время создания</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="cell in TasksEdit.cells">
+                                        <td style="display:none"></td>
+                                        <td>{{cell.number}}</td>
+                                        <td><input type="text" ng-value="cell.name"></td>
+                                        <td><input type="text" ng-value="cell.time_exec"></td>
+                                        <td><input type="text" ng-value="cell.executive"></td>
+                                        <td>{{cell.time_expire}}</td>
+                                        <td><button ng-click="">Изменить</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                  
+                    </div>
+                </div>
+                <div ng-switch-when="showWindow">
+                    
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>
